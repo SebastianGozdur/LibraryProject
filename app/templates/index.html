@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+    
+
+
+     <h1>Rezerwacja</h1>
+                 <form action="" method="post" name="login">
+                      {{ form.hidden_tag() }}
+                     
+                    <table>
+                    <tr>
+                         <td style="padding-left:10px">Login:    {{ form.openid(size=20) }}   </td>
+                         <td style="padding-left:25px"> Hasło:   {{ form.password(size=20) }}   </td>
+                         <td style="padding-left:25px"> Id:   {{ form.bookId(size=20) }}   </td>
+                    </tr>
+                     </table>
+                     </br>
+                     <p><input type="submit" value="Submit"></p>
+      </form>  
+
+     <table border="1" style="width:100%; margin-top:20px">
+   
+        <tr>    
+            <td> Id </td> <td> Title </td>  <td> Author</td> <td> Quantity</td>
+        </tr>
+        {% for rec in records %}        
+        <tr>
+             <td> {{ rec.id }} </td> <td>{{ rec.title }} </td> <td> {{ rec.author }}</td> <td>{{ rec.quantity }} </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+
+
+
+{% endblock %}
