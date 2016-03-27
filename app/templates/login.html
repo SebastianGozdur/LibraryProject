@@ -1,22 +1,53 @@
 <html>
   <head>
     {% if title %}
-    <title>{{ title }} - microblog</title>
+    <title>{{ title }} </title>
     {% else %}
-    <title>microblog</title>
+    <title></title>
     {% endif %}
   </head>
   <body>
     <hr>
+   
+    <p>Hello {{ name }}  </p>
+    <h2> Zarezerwuj książkę: </h2>
+    
+    <form action="/login" method="post" name="reservation">
+        <input type = "text" name = "id" />
+        <p><input type="submit" value="Rezerwuj"></p>
+    </form>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul>
-    {% for message in messages %}
-        <li>{{ message }} </li>
+    <ul class=flashes>
+     {% for message in messages %}
+      <li>{{ message }}</li>
     {% endfor %}
     </ul>
     {% endif %}
     {% endwith %}
-    {% block content %}{% endblock %}
+
+    <h2> Wypożyczone książki: </h2>
+     <table border="1" style="width:100%; margin-top:20px">
+        <tr>    
+            <td> Id </td> <td> Title </td>  <td> Author</td> 
+        </tr>
+        {% for rec in reservedBooks %}        
+        <tr>
+             <td> {{ rec[1].id }} </td> <td>{{ rec[1].title }} </td> <td> {{ rec[1].author }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2> Dostępne książki: </h2>
+     <table border="1" style="width:100%; margin-top:20px">
+        <tr>    
+            <td> Id </td> <td> Title </td>  <td> Author</td> <td> Quantity </td>
+        </tr>
+        {% for rec in availableBooks %}        
+        <tr>
+             <td> {{ rec.id }} </td> <td>{{ rec.title }} </td> <td> {{ rec.author }}</td> <td> {{ rec.quantity }} </td>
+        </tr>
+        {% endfor %}
+    
+   
   </body>
 </html>
