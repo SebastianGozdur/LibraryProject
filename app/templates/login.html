@@ -5,12 +5,16 @@
     {% else %}
     <title></title>
     {% endif %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
   </head>
   <body>
-    <hr>
-   
-    <p>Hello {{ name }}  </p>
+    
+    <div id="main">
+   <div id="content">
+
+    <p>Witaj {{ name }}  </p>
     <h2> Zarezerwuj książkę: </h2>
+    <p> wystarczy podać identyfikatory po przecinku </p>
     
     <form action="/login" method="post" name="reservation">
         <input type = "text" name = "id" />
@@ -47,7 +51,8 @@
              <td> {{ rec.id }} </td> <td>{{ rec.title }} </td> <td> {{ rec.author }}</td> <td> {{ rec.quantity }} </td>
         </tr>
         {% endfor %}
-    
+    </div>
+    </div>
    
   </body>
 </html>

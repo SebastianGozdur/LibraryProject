@@ -4,11 +4,14 @@
 
 
      <h1>Rezerwacja</h1>
+       <hr>
                  <form action="/login" method="post">                    
                     <table>
                     <tr>
+                         <td style="padding-left:10px"> Login: </td>
                          <td style="padding-left:10px"><input type = "text" name = "nickname" />   </td>
-                         <td style="padding-left:25px"><input type = "text" name = "password" />  </td>
+                         <td style="padding-left:10px"> Password: </td>
+                         <td style="padding-left:25px"><input type = "password" name = "password" />  </td>
                 
                     </tr>
                      </table>
@@ -16,7 +19,17 @@
                      <p><input type="submit" name="login" value="Submit"></p>
            
       </form>  
-
+       
+      {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+     {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <hr>
     
 
 
