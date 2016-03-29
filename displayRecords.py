@@ -1,4 +1,4 @@
-from app import db, models
+from librarysystem import db, models
 from sqlalchemy.sql import and_
 
 '''
@@ -74,14 +74,8 @@ db.session.commit()
 
 
 '''
-db.session.add(models.Books(title='Wiedzmin : Wieza jaskolki', author='Andrzej Sapkowski', quantity=5))
-db.session.add(models.Books(title='Jakas ksiazka', author='Ktos napisal', quantity=2))
-db.session.add(models.Books(title='Kolejna', author='Kolejny', quantity=1))
-db.session.add(models.Books(title='Wiedzmin : Wieza jaskolki', author='Andrzej Sapkowski', quantity=5))
-db.session.add(models.Books(title='Jakas ksiazka', author='Ktos napisal', quantity=2))
-db.session.add(models.Books(title='Kolejna', author='Kolejny', quantity=1))
-db.session.add(models.Books(title='50 twarzy Greya', author='E.L. James', quantity=69))
-db.session.add(models.Books(title='Lsnienie', author='Stephen King', quantity=2))
+q=db.session.query(models.Books).filter(models.Books.id==1)
+q.one().quantity-=1
 db.session.commit()
 #print db.session.query(models.User.nickname, models.User.password).all()
 
