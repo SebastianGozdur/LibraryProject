@@ -19,7 +19,7 @@ body{
     width:800px;
     height:300px;
     margin: 0 auto;
-    background-image: url("logo.jpg");
+    background-image: url("logo.png");
     background-repeat:no-repeat;
     background-size:cover;
 }
@@ -30,4 +30,8 @@ body{
     margin: 0 auto;
     border: 1px solid;
 
+}
+
+.form-control{
+    width:200px;
 }

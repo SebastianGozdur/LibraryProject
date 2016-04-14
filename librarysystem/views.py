@@ -15,7 +15,7 @@ def index():
 class UserVariable: 
     user = ' '
     password = ' '
-    user_id = 0
+    user_id = 0   
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -91,9 +91,14 @@ def isAlreadyBorrowed(bookId,userId):
 
     
 
+@app.route('/registration')
+def registration():
+	return render_template('registration.html')
 
 
-
+@app.route('/help')
+def help():
+	return render_template('help.html')
 
 
 

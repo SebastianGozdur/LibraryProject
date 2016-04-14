@@ -1,16 +1,6 @@
-<html>
-  <head>
-    {% if title %}
-    <title>{{ title }} </title>
-    {% else %}
-    <title></title>
-    {% endif %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='loginStyle.css') }}">
-  </head>
-  <body>
+{% extends "base.html" %}
+{% block content %}
     
-    <div id="main">
-   <div id="content">
 
     <p>Witaj {{ name }}  </p>
    {% with messages = get_flashed_messages() %}
@@ -30,19 +20,21 @@
     
     <form action="/login" method="post" name="reservation">
         <input type = "text" name = "id" />
-        <p><input type="submit" value="Rezerwuj"></p>
+        <p><button type="submit" name= "reserve" class="btn btn-default">Rezerwuj</button>    </p>
+
     </form>
 
     <h2> Usuń rezerwację: </h2>
     <form action="/login" method="post" name="removeReservation">
         <input type = "text" name = "id" />
-        <p><input type="submit" name="remove" value="Delete"></p>
+        <p><button type="submit" name= "remove" " class="btn btn-default">Usun</button>  
+  
     </form>
 
 
 
     <h2> Wypożyczone książki: </h2>
-     <table border="1" style="width:100%; margin-top:20px">
+     <table class="table" border="1" style="width:100%; margin-top:20px">
         <tr>    
             <td> Id </td> <td> Title </td>  <td> Author</td> 
         </tr>
@@ -53,7 +45,7 @@
         {% endfor %}
     </table>
     <h2> Dostępne książki: </h2>
-     <table border="1" style="width:100%; margin-top:20px">
+     <table class="table" border="1" style="width:100%; margin-top:20px">
         <tr>    
             <td> Id </td> <td> Title </td>  <td> Author</td> <td> Quantity </td>
         </tr>
@@ -62,8 +54,7 @@
              <td> {{ rec.id }} </td> <td>{{ rec.title }} </td> <td> {{ rec.author }}</td> <td> {{ rec.quantity }} </td>
         </tr>
         {% endfor %}
-    </div>
-    </div>
-   
-  </body>
-</html>
+      </table>
+
+{% endblock %}
+

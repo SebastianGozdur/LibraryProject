@@ -9,24 +9,29 @@
     <body>
           <div id="main">
                 <div id="logo">   </div>
+                <nav class="navbar navbar-inverse">
+                      <div class="container-fluid">
+                          <ul class="nav navbar-nav">
+                            <li class="active"><a href="index">Strona Główna</a></li>
+                            <li><a href="registration">Rejestracja</a></li>
+                            <li><a href="help">Pomoc </a></li>
+                         </ul>
+                     </div>
+                </nav>
                     
 
                 <div id="content">
                 {% block content %}{% endblock %}
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum lacus sit amet orci porttitor, id hendrerit nisl porta. Proin posuere diam dui, tristique euismod magna finibus nec. Pellentesque sit amet sem porta nulla blandit euismod. Suspendisse ac pellentesque augue. In molestie pellentesque diam nec lacinia. Vivamus et consectetur nisi. Nam interdum bibendum finibus. Duis luctus sagittis facilisis. Donec purus lectus, venenatis tristique consequat sit amet, cursus vitae ipsum. Fusce eu molestie turpis. In rhoncus dignissim lectus, et ultricies nisl malesuada vel. Phasellus sit amet efficitur massa, at pretium mi.
-
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam volutpat interdum orci, vitae aliquam justo euismod sed. Integer ac pellentesque est, ac euismod nibh. Nulla vel ligula id justo dignissim placerat. Maecenas blandit, purus non porttitor laoreet, diam enim imperdiet nisl, nec ornare magna dui sit amet lorem. Nunc quis quam ullamcorper elit posuere cursus a id nisl. Vivamus at elit sit amet nunc viverra consectetur nec nec neque. Sed fermentum, est at feugiat lobortis, ante mauris finibus dolor, vel ullamcorper ex nibh non sem. Morbi laoreet justo libero, in blandit ligula bibendum sed. Curabitur pellentesque eros a maximus tempor. Duis ut purus orci. Etiam congue enim non leo facilisis, at pharetra dui egestas. </p>
-
-                   
-
-                <hr>          
+                
+              
                </div>
-               <div id="footer">
-                    <center> <p> Autor: Sebastian Gozdur</p> </center>
-               </div>
+                  <footer class="footer">
+                      <div class="container">
+                          <p class="text-muted">Autor: Sebastian Gozdur</p>
+                      </div>
+                  </footer>
+           
+
           </div>
-       
-        
-        
     </body>
 </html>

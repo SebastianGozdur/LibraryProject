@@ -1,23 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
     
-
-
-     <h1>Rezerwacja</h1>
-       <hr>
+    
+        <h3>Logowanie: </h3>
+       <hr>        
                  <form action="/login" method="post">                    
-                    <table>
-                    <tr>
-                         <td style="padding-left:10px"> Login: </td>
-                         <td style="padding-left:10px"><input type = "text" name = "nickname" />   </td>
-                         <td style="padding-left:10px"> Password: </td>
-                         <td style="padding-left:25px"><input type = "password" name = "password" />  </td>
-                
-                    </tr>
-                     </table>
-                     </br>
-                     <p><input type="submit" name="login" value="Submit"></p>
-           
+                    <div class="col-xs-2">
+                        <span class="input-group-addon" id="sizing-addon3">Username</span>
+                    </div>
+                    <div class="col-xs-2">       
+                         <input  class="form-control" placeholder="Username"  type = "text" name = "nickname" maxlength ="50"/>  
+                    </div>
+                     <div class="col-xs-2">
+                        <span class="input-group-addon" id="sizing-addon3">Password</span>
+                    </div>
+                     <div class="col-xs-2">                
+                        <input class="form-control" placeholder="Password" type = "password" name = "password" maxlength="50" /> 
+                    </div>
+         
+                    <button type="submit" name= "login" class="btn btn-default">Submit</button>        
       </form>  
        
       {% with messages = get_flashed_messages() %}
@@ -30,6 +31,8 @@
     {% endif %}
     {% endwith %}
     <hr>
+
+    
     
 
 
