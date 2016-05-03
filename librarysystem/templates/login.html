@@ -14,7 +14,6 @@
     {% endwith %}
 
 
-
     <h2> Zarezerwuj książkę: </h2>
     <p> wystarczy podać identyfikatory po przecinku </p>
     
@@ -27,11 +26,9 @@
     <h2> Usuń rezerwację: </h2>
     <form action="/login" method="post" name="removeReservation">
         <input type = "text" name = "id" />
-        <p><button type="submit" name= "remove" " class="btn btn-default">Usun</button>  
+        <p><button type="submit" name= "remove" class="btn btn-default">Usun</button>  
   
     </form>
-
-
 
     <h2> Wypożyczone książki: </h2>
      <table class="table" border="1" style="width:100%; margin-top:20px">
@@ -55,6 +52,7 @@
         </tr>
         {% endfor %}
       </table>
+
 
 {% endblock %}
 

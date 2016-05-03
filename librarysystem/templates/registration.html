@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
     
-    
+        {% with messages = get_flashed_messages() %}
+         {% if messages %}
+         <ul class=flashes>
+          {% for message in messages %}
+              <li>{{ message }}</li>
+         {% endfor %}
+       </ul>
+        {% endif %}
+        {% endwith %}
+
         <h3>Rejestracja: </h3>
         <form action="/registration" method="post">                    
                     <div class="col-xs-4">
@@ -21,11 +30,7 @@
                     </div>
                     </br></br></br>
          
-                    <button type="submit" name= "login" class="btn btn-default">Register</button>    
+                    <button type="submit" name= "register" class="btn btn-default">Register</button>    
         </form>    
    
-    
-    
-
-
 {% endblock %}

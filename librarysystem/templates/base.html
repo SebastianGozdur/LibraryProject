@@ -1,37 +1,67 @@
 <html>
     <head>
         <title> {{title}} </title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}">
+		<link href="{{ url_for('static', filename='dist/css/animsition.min.css') }}" rel="stylesheet">
     </head>
-
-    <body>
-          <div id="main">
+  <body>
+          <div id="main" class="animsition" data-animsition-in-class="fade-in-right-sm"  data-animsition-in-duration="2000">
                 <div id="logo">   </div>
                 <nav class="navbar navbar-inverse">
                       <div class="container-fluid">
-                          <ul class="nav navbar-nav">
-                            <li class="active"><a href="index">Strona Główna</a></li>
-                            <li><a href="registration">Rejestracja</a></li>
-                            <li><a href="help">Pomoc </a></li>
+                          <ul id="menu" class="nav navbar-nav">
+                            <li id="indexElement"><a href="index" class="animsition-link">Strona Główna</a></li>
+                            <li id="registrationElement"><a href="registration" class="animsition-link">Rejestracja</a></li>
+                            <li id="helpElement"><a href="help" class="animsition-link">Pomoc </a></li>
                          </ul>
                      </div>
                 </nav>
-                    
 
+       
                 <div id="content">
                 {% block content %}{% endblock %}
-                
-              
+
+
                </div>
                   <footer class="footer">
                       <div class="container">
                           <p class="text-muted">Autor: Sebastian Gozdur</p>
                       </div>
                   </footer>
-           
-
           </div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="{{ url_for('static', filename='dist/js/animsition.min.js') }}" charset="utf-8"></script>
+		<script>  
+            $(document).ready(function() {
+  				  $('.animsition').animsition();
+  			});
+
+            
+          function getLeaf(url) {
+            return url.substring(url.lastIndexOf("/")+1);
+          }
+
+          function setActive(liObject){
+            liObject.className="active";
+          }
+
+                var currentLocation = getLeaf(document.location.href);
+                var menu = document.getElementById("menu");
+                var buttonsHrefs = menu.getElementsByTagName("a");
+
+                for (i=0; i<buttonsHrefs.length; i++) {
+                  var currentHref = buttonsHrefs[i].getAttribute("href");
+                  var currentButtonHref = getLeaf(currentHref);
+                  if (currentButtonHref==currentLocation) {
+                    setActive(buttonsHrefs[i].parentNode)
+                  }
+                  else if(currentLocation==""){
+                    setActive(buttonsHrefs[0].parentNode)
+                  }
+                }      
+        </script>
     </body>
 </html>

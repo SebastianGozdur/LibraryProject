@@ -1,5 +1,6 @@
 from librarysystem import db
 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(64))
@@ -17,8 +18,6 @@ class Books(db.Model):
     author = db.Column(db.String(120))
     quantity = db.Column(db.Integer)
 
-
-
     def getTitle(self):
         return self.title
 
@@ -33,8 +32,6 @@ class ReservedBooks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
-
-  
 
     def getUserId(self):
         return self.user_id

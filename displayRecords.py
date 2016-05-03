@@ -74,10 +74,13 @@ db.session.commit()
 
 
 '''
-q=db.session.query(models.Books).filter(models.Books.id==1)
-q.one().quantity-=1
-db.session.commit()
-#print db.session.query(models.User.nickname, models.User.password).all()
+#q=db.session.query(models.Books).filter(models.Books.id==1)
+#q.one().quantity-=1
+#db.session.commit()
+ 
+record = db.session.query(models.User.nickname).all()
+for rec in record:
+    print rec.nickname
 
 #print db.session.query(models.ReservedBooks).all()
 
