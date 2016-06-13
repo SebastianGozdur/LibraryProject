@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <p>Dodaj nową książke: </p>
+  <div id="createBookFormContainer">
+        <form action="/login" method="post">
+            <div class="col-xs-2">
+                <span class="input-group-addon" id="sizing-addon3">Tytuł:</span>
+            </div>
+            <div class="col-xs-2">
+                <input  class="form-control" placeholder="Title"  type = "text" name = "title" />
+            </div>
+            <div class="col-xs-2">
+                <span class="input-group-addon" id="sizing-addon3">Autor:</span>
+            </div>
+            <div class="col-xs-2">
+                <input class="form-control" placeholder="Author" type = "text" name = "author"/>
+            </div>  
+             <div class="col-xs-2">
+                <span class="input-group-addon" id="sizing-addon3">Ilość:</span>
+            </div>
+             <div class="col-xs-2">
+                <input class="form-control" placeholder="Quantity" type = "text" name = "quantity"/>
+            </div> 
+	    </br></br></br></br></br>
+                <button id="addButton" type="submit" name= "login" class="btn btn-default">Add</button>
+        </form>
+    </div>
+
+
+{% endblock %}

@@ -122,6 +122,11 @@ def isUserAvailable(username):
 @app.route('/help')
 def help():
 	return render_template('help.html')
+      
+
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
 
 
 

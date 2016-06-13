@@ -49,6 +49,19 @@ body{
     width:100%;
 }
 
+
+
+#createBookFormContainer .col-xs-2{
+  margin-top: 10px;
+  float:left;
+}
+
+#createBookFormContainer addButton{
+  clear:left;
+  float:left;
+}
+
+
 #footer{
     width:500px;
     height:20px;
