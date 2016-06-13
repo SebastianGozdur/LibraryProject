@@ -2,14 +2,15 @@
 {% block content %}
     
 
-    <p>Witaj {{ name }}  </p>
+    <div class="well"> Witaj {{ name }}! </div>
    {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul class=flashes>
+    
+    <div class="alert alert-info" role="alert">
      {% for message in messages %}
-      <li>{{ message }}</li>
+      <p>{{ message }}</p>
     {% endfor %}
-    </ul>
+    </div>
     {% endif %}
     {% endwith %}
 
@@ -31,7 +32,7 @@
     </form>
 
     <h2> Wypożyczone książki: </h2>
-     <table class="table" border="1" style="width:100%; margin-top:20px">
+     <table class="table table-striped" border="1" style="width:100%; margin-top:20px">
         <tr>    
             <td> Id </td> <td> Title </td>  <td> Author</td> 
         </tr>
@@ -42,7 +43,7 @@
         {% endfor %}
     </table>
     <h2> Dostępne książki: </h2>
-     <table class="table" border="1" style="width:100%; margin-top:20px">
+     <table class="table table-striped" border="1" style="width:100%; margin-top:20px">
         <tr>    
             <td> Id </td> <td> Title </td>  <td> Author</td> <td> Quantity </td>
         </tr>

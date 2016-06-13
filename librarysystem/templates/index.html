@@ -1,37 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
 
-
-       <hr>
-            <div id="loginFormContainter">
-                 <form action="/login" method="post">
-                    <div class="col-xs-2">
-                        <span class="input-group-addon" id="sizing-addon3">Username</span>
-                    </div>
-                    <div class="col-xs-2">
-                         <input  class="form-control" placeholder="Username"  type = "text" name = "nickname" />
-                    </div>
-                     <div class="col-xs-2">
-                        <span class="input-group-addon" id="sizing-addon3">Password</span>
-                    </div>
-                     <div class="col-xs-2">
-                        <input class="form-control" placeholder="Password" type = "password" name = "password"/>
-                    </div>
-         
-                    <button id="submitButton" type="submit" name= "login" class="btn btn-default">Submit</button>
-                 </form>
-            </div>
-
-      {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul class=flashes>
      {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
+        <div class="alert alert-danger" role="alert">{{ message }}</div>
+     {% endfor %}
     {% endif %}
     {% endwith %}
-    <hr>
 
+
+    <div id="loginFormContainter">
+        <form action="/login" method="post">
+            <div class="col-xs-2">
+                <span class="input-group-addon" id="sizing-addon3">Username</span>
+            </div>
+            <div class="col-xs-2">
+                <input  class="form-control" placeholder="Username"  type = "text" name = "nickname" />
+            </div>
+            <div class="col-xs-2">
+                <span class="input-group-addon" id="sizing-addon3">Password</span>
+            </div>
+            <div class="col-xs-2">
+                <input class="form-control" placeholder="Password" type = "password" name = "password"/>
+            </div>   
+                <button id="submitButton" type="submit" name= "login" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+
+    
 
 {% endblock %}

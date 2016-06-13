@@ -52,10 +52,15 @@ def login():
                 db.session.commit()
 
     dbUser = db.session.query(models.User).filter(models.User.nickname == UserVariable.user).all()
+
+    
     if len(dbUser) == 0:
         flash('Nie ma uzytkownika')
         return redirect('/index')
-    if dbUser[0].password != UserVariable.password:
+      
+    currentPassword = dbUser[0].password
+    currentPassword = base64.b64decode(currentPassword +"===") 
+    if currentPassword != UserVariable.password:
         flash('Bledne haslo')
         return redirect('/index')
     if UserVariable.user == dbUser[0].nickname:
@@ -92,11 +97,12 @@ def isAlreadyBorrowed(bookId,userId):
 
 @app.route('/registration', methods=['POST','GET'])
 def registration():
-    
+
     if 'register' in request.form:
         nickname = request.form['nickname']
         if isUserAvailable(nickname):
             password =  request.form['password']
+            password = base64.b64encode(password)
             db.session.add(models.User(nickname=nickname,password=password))
             db.session.commit()
             flash('Konto zostalo utworzone')

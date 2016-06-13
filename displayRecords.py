@@ -78,9 +78,13 @@ db.session.commit()
 #q.one().quantity-=1
 #db.session.commit()
  
-record = db.session.query(models.User.nickname).all()
-for rec in record:
-    print rec.nickname
+#record = db.session.query(models.User.nickname).all()
+#for rec in record:
+ #   print rec.nickname
+
+print db.session.query(models.User.nickname, models.User.password).all()
+
+print db.session.query(models.ReservedBooks).all()
 
 #print db.session.query(models.ReservedBooks).all()
 
