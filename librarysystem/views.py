@@ -25,9 +25,12 @@ def login():
     elif 'remove' in request.form:
 	   ids = request.form['id']
 	   idList = ids.split(',') 
-	
 	   for book in idList:
-	      if type(book) is int :
+		  try:
+		    bood = int(book)
+		  except:
+		    flash('Zly format')
+		    continue
 		  userBooks = db.session.query(models.ReservedBooks).filter(models.ReservedBooks.user_id==UserVariable.user_id).all()
 		  if findUserBook(book,userBooks)==True:
 		      db.session.query(models.ReservedBooks).filter(models.ReservedBooks.user_id==UserVariable.user_id, models.ReservedBooks.book_id==book).delete()
@@ -36,16 +39,17 @@ def login():
 		      flash('Ksiazka o id "%s" zostala usunieta' % book)
 		  else:
 		      flash('Nie ma ksiazki o id "%s" w Twoich rezerwacjach' % book)
-	      else:
-		  flash('Zly format danych')
 	 
     else:
         ids=request.form['id']
         idList=ids.split(',')
-        
         allBooks = db.session.query(models.Books).all()
 	for book in idList:
-	    if type(book) is int :
+	      try:
+		bood = int(book)
+	      except:
+		 flash('Zly format')
+		 continue
 	      if findBook(book, allBooks) == False:
 		flash('Nie istnieje ksiazka o id "%s"' % book)
 	      elif isAlreadyBorrowed(book,UserVariable.user_id):
@@ -56,8 +60,8 @@ def login():
 		flash('Zarezerowowano ksiazki o id: "%s"' % book)
 		db.session.add(models.ReservedBooks(book_id=book, user_id=UserVariable.user_id))
 		db.session.commit()
-	    else:
-	      flash('Zly format')
+	    
+	    
     dbUser = db.session.query(models.User).filter(models.User.nickname == UserVariable.user).all()
 
     

@@ -92,7 +92,9 @@ for rec in record:
 #db.session.commit()
 record = db.session.query(models.User).all()
 for rec in record:
-  print rec.book_id
+  print rec.nickname,' ', rec.password
+
+
 #db.session.add(models.Administrators(nickname='admin', password='admin'))
 #db.session.commit()
 	  
