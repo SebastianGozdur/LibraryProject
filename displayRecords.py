@@ -82,10 +82,20 @@ db.session.commit()
 #for rec in record:
  #   print rec.nickname
 
-print db.session.query(models.User.nickname, models.User.password).all()
+#print db.session.query(models.User.nickname, models.User.password).all()
 
-print db.session.query(models.ReservedBooks).all()
-
+#print db.session.query(models.ReservedBooks).all()
+record = db.session.query(models.Administrators).all()
+for rec in record:
+  print rec.nickname, ' ', rec.password
+#db.session.query(models.User).delete()
+#db.session.commit()
+record = db.session.query(models.User).all()
+for rec in record:
+  print rec.book_id
+#db.session.add(models.Administrators(nickname='admin', password='admin'))
+#db.session.commit()
+	  
 #print db.session.query(models.ReservedBooks).all()
 
 

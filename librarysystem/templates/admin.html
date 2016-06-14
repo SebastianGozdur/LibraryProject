@@ -1,9 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
+   {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    
+    <div class="alert alert-info" role="alert">
+     {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
   <p>Dodaj nową książke: </p>
   <div id="createBookFormContainer">
-        <form action="/login" method="post">
+        <form action="/admin" method="post">
             <div class="col-xs-2">
                 <span class="input-group-addon" id="sizing-addon3">Tytuł:</span>
             </div>
@@ -23,9 +34,36 @@
                 <input class="form-control" placeholder="Quantity" type = "text" name = "quantity"/>
             </div> 
 	    </br></br></br></br></br>
-                <button id="addButton" type="submit" name= "login" class="btn btn-default">Add</button>
+                <button id="addButton" type="submit" name= "add" class="btn btn-default">Add</button>
         </form>
     </div>
+    </br>
+    <p> Usuń książkę: </p>
+    <div id="deleteBookFormContainter">
+      <form action="/admin" method="post">
+            <div class="col-xs-2">
+                <span class="input-group-addon" id="sizing-addon3">Id:</span>
+            </div>
+            <div class="col-xs-2">
+                <input  class="form-control" placeholder="id"  type = "text" name = "id" />
+            </div>
+     
+	    </br></br>
+                <button id="addButton" type="submit" name= "delete" class="btn btn-default">Delete</button>
+        </form>
+    </div>
+    
+     <h2> Dostępne książki: </h2>
+     <table class="table table-striped" border="1" style="width:100%; margin-top:20px">
+        <tr>    
+            <td> Id </td> <td> Title </td>  <td> Author</td> <td> Quantity </td>
+        </tr>
+        {% for rec in availableBooks %}        
+        <tr>
+             <td> {{ rec.id }} </td> <td>{{ rec.title }} </td> <td> {{ rec.author }}</td> <td> {{ rec.quantity }} </td>
+        </tr>
+        {% endfor %}
+      </table>
 
 
 {% endblock %}

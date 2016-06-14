@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+     {% for message in messages %}
+        <div class="alert alert-danger" role="alert">{{ message }}</div>
+     {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+    <div id="loginFormContainter">
+        <form action="/admin" method="post">
+            <div class="col-xs-2">
+                <span class="input-group-addon" id="sizing-addon3">Login:</span>
+            </div>
+            <div class="col-xs-2">
+                <input  class="form-control" placeholder="Username"  type = "text" name = "nickname" />
+            </div>
+            <div class="col-xs-2">
+                <span class="input-group-addon" id="sizing-addon3">Hasło:</span>
+            </div>
+            <div class="col-xs-2">
+                <input class="form-control" placeholder="Password" type = "password" name = "password"/>
+            </div>   
+                <button id="submitButton" type="submit" name= "admin" class="btn btn-default">Loguj</button>
+        </form>
+    </div>
+
+    
+    
+    
+{% endblock %}

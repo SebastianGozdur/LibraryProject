@@ -23,34 +23,41 @@ def login():
         UserVariable.user = request.form['nickname']
         UserVariable.password = request.form['password']
     elif 'remove' in request.form:
-        ids = request.form['id']
-        idList = ids.split(',')
-        for book in idList:
-            userBooks = db.session.query(models.ReservedBooks).filter(models.ReservedBooks.user_id==UserVariable.user_id).all()
-            if findUserBook(book,userBooks)==True:
-                db.session.query(models.ReservedBooks).filter(models.ReservedBooks.user_id==UserVariable.user_id, models.ReservedBooks.book_id==book).delete()
-                db.session.query(models.Books).filter(models.Books.id==book).one().quantity+=1
-                db.session.commit()
-                flash('Ksiazka o id "%s" zostala usunieta' % book)
-            else:
-                flash('Nie ma ksiazki o id "%s" w Twoich rezerwacjach' % book)
+	   ids = request.form['id']
+	   idList = ids.split(',') 
+	
+	   for book in idList:
+	      if type(book) is int :
+		  userBooks = db.session.query(models.ReservedBooks).filter(models.ReservedBooks.user_id==UserVariable.user_id).all()
+		  if findUserBook(book,userBooks)==True:
+		      db.session.query(models.ReservedBooks).filter(models.ReservedBooks.user_id==UserVariable.user_id, models.ReservedBooks.book_id==book).delete()
+		      db.session.query(models.Books).filter(models.Books.id==book).one().quantity+=1
+		      db.session.commit()
+		      flash('Ksiazka o id "%s" zostala usunieta' % book)
+		  else:
+		      flash('Nie ma ksiazki o id "%s" w Twoich rezerwacjach' % book)
+	      else:
+		  flash('Zly format danych')
+	 
     else:
         ids=request.form['id']
         idList=ids.split(',')
-
+        
         allBooks = db.session.query(models.Books).all()
-        for book in idList:
-            if findBook(book, allBooks) == False:
-                flash('Nie istnieje ksiazka o id "%s"' % book)
-            elif isAlreadyBorrowed(book,UserVariable.user_id):
-                flash('Ksiazka o id "%s" jest juz przez Ciebie wypozyczona' % book)
-            elif isAvailable(book):
-                flash('Nie ma ksiazki o id "%s" na stanie. Sprobuj kiedy indziej' % book)
-            else:
-                flash('Zarezerowowano ksiazki o id: "%s"' % book)
-                db.session.add(models.ReservedBooks(book_id=book, user_id=UserVariable.user_id))
-                db.session.commit()
-
+	for book in idList:
+	    if type(book) is int :
+	      if findBook(book, allBooks) == False:
+		flash('Nie istnieje ksiazka o id "%s"' % book)
+	      elif isAlreadyBorrowed(book,UserVariable.user_id):
+		flash('Ksiazka o id "%s" jest juz przez Ciebie wypozyczona' % book)
+	      elif isAvailable(book):
+		flash('Nie ma ksiazki o id "%s" na stanie. Sprobuj kiedy indziej' % book)
+	      else:
+		flash('Zarezerowowano ksiazki o id: "%s"' % book)
+		db.session.add(models.ReservedBooks(book_id=book, user_id=UserVariable.user_id))
+		db.session.commit()
+	    else:
+	      flash('Zly format')
     dbUser = db.session.query(models.User).filter(models.User.nickname == UserVariable.user).all()
 
     
@@ -124,9 +131,39 @@ def help():
 	return render_template('help.html')
       
 
-@app.route('/admin')
+@app.route('/admin', methods=['POST'])
 def admin():
-    return render_template('admin.html')
+    if 'admin' in request.form:
+      adminUser = db.session.query(models.Administrators).filter(models.Administrators.nickname == request.form['nickname']).all()
+      if len(adminUser) != 0:
+	  if request.form['password'] == adminUser[0].password:
+	      availableBooks=db.session.query(models.Books).all()
+	      return render_template('admin.html', availableBooks=availableBooks)
+      else:
+	    flash('Nie ma uzytkownika')
+	    return render_template('adminLogin.html')
+    elif 'add' in request.form:
+      title = request.form['title']
+      author = request.form['author']
+      quantity = request.form['quantity']
+      db.session.add(models.Books(title=title, author=author, quantity=quantity))
+      db.session.commit()
+      availableBooks=db.session.query(models.Books).all()
+      flash('Dodano wprowadzona ksiazke')
+      return render_template('admin.html', availableBooks=availableBooks)
+    elif 'delete' in request.form:
+      bookId = request.form['id']
+      db.session.query(models.Books).filter(models.Books.id==bookId).delete()
+      db.session.query(models.ReservedBooks).filter(models.ReservedBooks.bookId == bookId).delete()
+      db.session.commit()
+      availableBooks=db.session.query(models.Books).all()
+      flash('Usunieto wprowadzona ksiazke i rezerwacje')
+      return render_template('admin.html', availableBooks=availableBooks)
+      
 
+
+@app.route('/adminlogin',methods=['GET'])
+def adminlogin():
+    return render_template('adminLogin.html')
 
 

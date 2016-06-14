@@ -39,3 +39,7 @@ class ReservedBooks(db.Model):
     def getBookId(self):
         return self.book_id
 
+class Administrators(db.Model):
+   id = db.Column(db.Integer, primary_key=True)
+   nickname = db.Column(db.String(64))
+   password = db.Column(db.String(64))
