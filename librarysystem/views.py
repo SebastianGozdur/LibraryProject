@@ -158,7 +158,7 @@ def admin():
     elif 'delete' in request.form:
       bookId = request.form['id']
       db.session.query(models.Books).filter(models.Books.id==bookId).delete()
-      db.session.query(models.ReservedBooks).filter(models.ReservedBooks.bookId == bookId).delete()
+      db.session.query(models.ReservedBooks).filter(models.ReservedBooks.book_id == bookId).delete()
       db.session.commit()
       availableBooks=db.session.query(models.Books).all()
       flash('Usunieto wprowadzona ksiazke i rezerwacje')
